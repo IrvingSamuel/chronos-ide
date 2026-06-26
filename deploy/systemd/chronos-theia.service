@@ -1,0 +1,20 @@
+[Unit]
+Description=Chronos Theia Browser IDE Host
+After=network.target
+
+[Service]
+# Use o caminho ABSOLUTO do node do nvm (não existe /usr/bin/node neste servidor).
+# Confira com: ls /root/.nvm/versions/node
+Environment=NODE_ENV=production
+Environment=PORT=7001
+WorkingDirectory=/home/chronos-ide/htdocs/ide.chronos.com.pt/applications/browser
+ExecStart=/root/.nvm/versions/node/v22.22.2/bin/node src-gen/backend/main.js --hostname=127.0.0.1 --port=7001
+Restart=always
+RestartSec=5
+# Evita contenção de memória com o app Laravel/Reverb no mesmo servidor.
+MemoryMax=2G
+StandardOutput=append:/var/log/chronos-theia.log
+StandardError=append:/var/log/chronos-theia.log
+
+[Install]
+WantedBy=multi-user.target

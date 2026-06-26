@@ -1,0 +1,26 @@
+{
+  "name": "@chronos/kairos",
+  "version": "0.1.0",
+  "description": "Painel do agente Kairos no Chronos IDE: chat em streaming (SSE) contra api.chronos.com.pt.",
+  "license": "MIT",
+  "keywords": ["theia-extension"],
+  "files": ["lib", "src"],
+  "dependencies": {
+    "@theia/core": "1.73.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "~5.4.5"
+  },
+  "scripts": {
+    "clean": "rimraf lib *.tsbuildinfo",
+    "compile": "tsc -p .",
+    "build": "yarn -s compile",
+    "watch": "tsc -w -p ."
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/chronos-kairos-frontend-module"
+    }
+  ]
+}

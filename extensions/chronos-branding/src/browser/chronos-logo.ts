@@ -1,0 +1,18 @@
+// SVG do logo do Chronos IDE, usado como string para favicon e UI (welcome).
+// Para trocar pela logo oficial, ajuste este SVG e os arquivos em
+// extensions/chronos-branding/resources/ e applications/electron/resources/icons/.
+export const CHRONOS_LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b2f63"/><stop offset="1" stop-color="#11132b"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd66b"/><stop offset="1" stop-color="#e8a93c"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="176" fill="none" stroke="#3a3f7d" stroke-width="12"/>
+  <path d="M176 150 H336 L268 256 L336 362 H176 L244 256 Z" fill="url(#gold)"/>
+  <rect x="158" y="136" width="196" height="22" rx="11" fill="url(#gold)"/>
+  <rect x="158" y="354" width="196" height="22" rx="11" fill="url(#gold)"/>
+</svg>`;

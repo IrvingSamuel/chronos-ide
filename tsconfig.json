@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2019",
+    "jsx": "react",
+    "lib": ["ES2019", "ES2020.Promise", "DOM"],
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "noEmitOnError": false
+  }
+}

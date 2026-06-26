@@ -1,0 +1,68 @@
+{
+  "private": true,
+  "name": "@chronos/browser-app",
+  "version": "0.1.0",
+  "description": "Chronos IDE — alvo navegador (hospedado em ide.chronos.com.pt).",
+  "license": "MIT",
+  "theia": {
+    "target": "browser",
+    "frontend": {
+      "config": {
+        "applicationName": "Chronos IDE",
+        "reloadOnReconnect": true,
+        "preferences": {
+          "files.enableTrash": false,
+          "security.workspace.trust.enabled": false
+        }
+      }
+    },
+    "backend": {
+      "config": {
+        "frontendConnectionTimeout": 3000,
+        "resolveSystemPlugins": false,
+        "configurationFolder": ".chronos-ide"
+      }
+    },
+    "generator": {
+      "config": {
+        "preloadTemplate": "./resources/preload.html"
+      }
+    }
+  },
+  "dependencies": {
+    "@chronos/branding": "0.1.0",
+    "@chronos/kairos": "0.1.0",
+    "@theia/core": "1.73.0",
+    "@theia/editor": "1.73.0",
+    "@theia/editor-preview": "1.73.0",
+    "@theia/file-search": "1.73.0",
+    "@theia/filesystem": "1.73.0",
+    "@theia/getting-started": "1.73.0",
+    "@theia/git": "1.73.0",
+    "@theia/keymaps": "1.73.0",
+    "@theia/markers": "1.73.0",
+    "@theia/messages": "1.73.0",
+    "@theia/monaco": "1.73.0",
+    "@theia/navigator": "1.73.0",
+    "@theia/outline-view": "1.73.0",
+    "@theia/plugin-ext": "1.73.0",
+    "@theia/plugin-ext-vscode": "1.73.0",
+    "@theia/preferences": "1.73.0",
+    "@theia/process": "1.73.0",
+    "@theia/scm": "1.73.0",
+    "@theia/search-in-workspace": "1.73.0",
+    "@theia/terminal": "1.73.0",
+    "@theia/vsx-registry": "1.73.0",
+    "@theia/workspace": "1.73.0"
+  },
+  "devDependencies": {
+    "@theia/cli": "1.73.0"
+  },
+  "scripts": {
+    "clean": "theia clean",
+    "build": "theia build --mode production",
+    "build:dev": "theia build --mode development",
+    "start": "theia start --hostname 127.0.0.1 --port 3000",
+    "watch": "theia build --watch --mode development"
+  }
+}

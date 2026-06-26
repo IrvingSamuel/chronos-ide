@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "chronos-ide",
+  "version": "0.1.0",
+  "description": "Chronos IDE — IDE própria do ecossistema Chronos, com o agente Kairos. Baseada em Eclipse Theia.",
+  "author": "Chronos",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22",
+    "yarn": ">=1.7.0 <2"
+  },
+  "workspaces": [
+    "extensions/*",
+    "applications/*"
+  ],
+  "devDependencies": {
+    "@theia/cli": "1.73.0",
+    "concurrently": "^8.2.2",
+    "electron-builder": "^26.15.3",
+    "rimraf": "^5.0.5",
+    "typescript": "~5.4.5"
+  },
+  "scripts": {
+    "clean": "yarn workspaces run clean",
+    "build:extensions": "yarn workspace @chronos/branding build && yarn workspace @chronos/kairos build",
+    "watch:extensions": "concurrently -n branding,kairos \"yarn workspace @chronos/branding watch\" \"yarn workspace @chronos/kairos watch\"",
+    "build:browser": "yarn build:extensions && yarn workspace @chronos/browser-app build",
+    "build:electron": "yarn build:extensions && yarn workspace @chronos/electron-app build",
+    "package:electron": "yarn build:extensions && yarn workspace @chronos/electron-app package",
+    "package:electron:dir": "yarn build:extensions && yarn workspace @chronos/electron-app package:dir",
+    "start:browser": "yarn workspace @chronos/browser-app start",
+    "start:electron": "yarn workspace @chronos/electron-app start"
+  }
+}

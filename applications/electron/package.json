@@ -1,0 +1,81 @@
+{
+  "private": true,
+  "name": "@chronos/electron-app",
+  "version": "0.1.0",
+  "description": "Chronos IDE — alvo desktop (instaladores .deb / .exe / .AppImage).",
+  "license": "MIT",
+  "main": "src-gen/frontend/electron-main.js",
+  "theia": {
+    "target": "electron",
+    "frontend": {
+      "config": {
+        "applicationName": "Chronos IDE",
+        "preferences": {
+          "files.enableTrash": true,
+          "security.workspace.trust.enabled": false
+        },
+        "electron": {
+          "showWindowEarly": true,
+          "splashScreenOptions": {
+            "content": "resources/ChronosSplash.svg",
+            "width": 480,
+            "height": 300
+          }
+        }
+      }
+    },
+    "backend": {
+      "config": {
+        "frontendConnectionTimeout": -1,
+        "startupTimeout": -1,
+        "resolveSystemPlugins": false,
+        "configurationFolder": ".chronos-ide"
+      }
+    },
+    "generator": {
+      "config": {
+        "preloadTemplate": "./resources/preload.html"
+      }
+    }
+  },
+  "dependencies": {
+    "@chronos/branding": "0.1.0",
+    "@chronos/kairos": "0.1.0",
+    "@theia/core": "1.73.0",
+    "@theia/editor": "1.73.0",
+    "@theia/editor-preview": "1.73.0",
+    "@theia/electron": "1.73.0",
+    "@theia/file-search": "1.73.0",
+    "@theia/filesystem": "1.73.0",
+    "@theia/getting-started": "1.73.0",
+    "@theia/git": "1.73.0",
+    "@theia/keymaps": "1.73.0",
+    "@theia/markers": "1.73.0",
+    "@theia/messages": "1.73.0",
+    "@theia/monaco": "1.73.0",
+    "@theia/navigator": "1.73.0",
+    "@theia/outline-view": "1.73.0",
+    "@theia/plugin-ext": "1.73.0",
+    "@theia/plugin-ext-vscode": "1.73.0",
+    "@theia/preferences": "1.73.0",
+    "@theia/process": "1.73.0",
+    "@theia/scm": "1.73.0",
+    "@theia/search-in-workspace": "1.73.0",
+    "@theia/terminal": "1.73.0",
+    "@theia/vsx-registry": "1.73.0",
+    "@theia/workspace": "1.73.0",
+    "electron": "39.8.7"
+  },
+  "devDependencies": {
+    "@theia/cli": "1.73.0",
+    "electron-builder": "^26.15.3"
+  },
+  "scripts": {
+    "clean": "theia clean",
+    "build": "theia build --mode production && theia rebuild:electron",
+    "rebuild": "theia rebuild:electron",
+    "start": "theia start",
+    "package": "yarn build && electron-builder -c electron-builder.yml",
+    "package:dir": "yarn build && electron-builder -c electron-builder.yml --dir"
+  }
+}

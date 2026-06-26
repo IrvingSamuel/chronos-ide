@@ -1,0 +1,27 @@
+{
+  "name": "@chronos/branding",
+  "version": "0.1.0",
+  "description": "Identidade visual do Chronos IDE: nome, logo, splash, página inicial e diálogo Sobre.",
+  "license": "MIT",
+  "keywords": ["theia-extension"],
+  "files": ["lib", "src", "resources"],
+  "dependencies": {
+    "@theia/core": "1.73.0",
+    "@theia/getting-started": "1.73.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "~5.4.5"
+  },
+  "scripts": {
+    "clean": "rimraf lib *.tsbuildinfo",
+    "compile": "tsc -p .",
+    "build": "yarn -s compile",
+    "watch": "tsc -w -p ."
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/chronos-branding-frontend-module"
+    }
+  ]
+}
