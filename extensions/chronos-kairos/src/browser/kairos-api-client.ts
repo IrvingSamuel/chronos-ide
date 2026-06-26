@@ -1,5 +1,5 @@
 import { injectable, inject } from '@theia/core/shared/inversify';
-import { PreferenceService } from '@theia/core/lib/browser';
+import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
 import { KairosChatMessage, KairosStreamEvent, KAIROS_DEFAULT_BASE_URL } from '../common/protocol';
 
 export interface KairosStreamHandlers {
@@ -17,7 +17,7 @@ export interface KairosStreamHandlers {
 export class KairosApiClient {
 
     @inject(PreferenceService)
-    protected readonly prefs: PreferenceService;
+    protected readonly prefs!: PreferenceService;
 
     get baseUrl(): string {
         const v = (this.prefs.get<string>('kairos.apiBaseUrl', KAIROS_DEFAULT_BASE_URL) || KAIROS_DEFAULT_BASE_URL).trim();

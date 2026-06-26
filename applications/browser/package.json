@@ -38,7 +38,6 @@
     "@theia/file-search": "1.73.0",
     "@theia/filesystem": "1.73.0",
     "@theia/getting-started": "1.73.0",
-    "@theia/git": "1.73.0",
     "@theia/keymaps": "1.73.0",
     "@theia/markers": "1.73.0",
     "@theia/messages": "1.73.0",

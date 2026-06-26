@@ -1,9 +1,8 @@
 import { interfaces } from '@theia/core/shared/inversify';
-import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/browser';
+import { PreferenceContribution, PreferenceSchema } from '@theia/core/lib/common/preferences/preference-schema';
 import { KAIROS_DEFAULT_BASE_URL } from '../common/protocol';
 
 export const KairosPreferenceSchema: PreferenceSchema = {
-    type: 'object',
     properties: {
         'kairos.apiBaseUrl': {
             type: 'string',

@@ -3,6 +3,7 @@
 # .exe SÓ deve ser gerado em runner Windows (CI). Linux gera deb/AppImage.
 appId: pt.com.chronos.ide
 productName: Chronos IDE
+executableName: chronos-ide
 copyright: Copyright © 2026 Chronos
 electronDist: ../../node_modules/electron/dist
 electronVersion: 39.8.7

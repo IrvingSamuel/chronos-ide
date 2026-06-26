@@ -1,4 +1,4 @@
-import * as React from '@theia/core/shared/react';
+import React from '@theia/core/shared/react';
 import { injectable, inject, postConstruct } from '@theia/core/shared/inversify';
 import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
 import { Message } from '@theia/core/lib/browser';
@@ -17,7 +17,7 @@ export class KairosWidget extends ReactWidget {
     static readonly LABEL = 'Kairos';
 
     @inject(KairosApiClient)
-    protected readonly client: KairosApiClient;
+    protected readonly client!: KairosApiClient;
 
     protected entries: ChatEntry[] = [];
     protected input = '';

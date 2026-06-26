@@ -1,4 +1,4 @@
-import * as React from '@theia/core/shared/react';
+import React from '@theia/core/shared/react';
 import { injectable, inject } from '@theia/core/shared/inversify';
 import { CommandRegistry } from '@theia/core/lib/common';
 import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
@@ -13,7 +13,7 @@ import { CHRONOS_LOGO_SVG } from './chronos-logo';
 export class ChronosGettingStartedWidget extends GettingStartedWidget {
 
     @inject(CommandRegistry)
-    protected readonly chronosCommands: CommandRegistry;
+    protected readonly chronosCommands!: CommandRegistry;
 
     protected render(): React.ReactNode {
         const appName = FrontendApplicationConfigProvider.get().applicationName || 'Chronos IDE';

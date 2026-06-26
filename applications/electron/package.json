@@ -3,8 +3,10 @@
   "name": "@chronos/electron-app",
   "version": "0.1.0",
   "description": "Chronos IDE — alvo desktop (instaladores .deb / .exe / .AppImage).",
+  "author": "Chronos <dev@chronos.com.pt>",
+  "homepage": "https://chronos.com.pt",
   "license": "MIT",
-  "main": "src-gen/frontend/electron-main.js",
+  "main": "src-gen/backend/electron-main.js",
   "theia": {
     "target": "electron",
     "frontend": {
@@ -48,7 +50,6 @@
     "@theia/file-search": "1.73.0",
     "@theia/filesystem": "1.73.0",
     "@theia/getting-started": "1.73.0",
-    "@theia/git": "1.73.0",
     "@theia/keymaps": "1.73.0",
     "@theia/markers": "1.73.0",
     "@theia/messages": "1.73.0",
@@ -63,11 +64,11 @@
     "@theia/search-in-workspace": "1.73.0",
     "@theia/terminal": "1.73.0",
     "@theia/vsx-registry": "1.73.0",
-    "@theia/workspace": "1.73.0",
-    "electron": "39.8.7"
+    "@theia/workspace": "1.73.0"
   },
   "devDependencies": {
     "@theia/cli": "1.73.0",
+    "electron": "39.8.7",
     "electron-builder": "^26.15.3"
   },
   "scripts": {

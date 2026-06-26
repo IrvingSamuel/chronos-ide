@@ -1,0 +1,14 @@
+{
+  "keytar": {
+    "originalLocation": "/home/rezumme-organizador/htdocs/chronos-ide/node_modules/keytar"
+  },
+  "drivelist": {
+    "originalLocation": "/home/rezumme-organizador/htdocs/chronos-ide/node_modules/drivelist"
+  },
+  "native-keymap": {
+    "originalLocation": "/home/rezumme-organizador/htdocs/chronos-ide/node_modules/native-keymap"
+  },
+  "node-pty": {
+    "originalLocation": "/home/rezumme-organizador/htdocs/chronos-ide/node_modules/node-pty"
+  }
+}
