@@ -1,6 +1,6 @@
-name: Chronos IDE — Release (.deb / .exe / .AppImage)
+name: Chronos IDE - Release
 
-# Gera os instaladores. .exe SÓ é produzido no runner Windows; .deb/.AppImage no Linux.
+# Gera os instaladores. .exe so e produzido no runner Windows; .deb/.AppImage no Linux.
 on:
   workflow_dispatch: {}
   push:
