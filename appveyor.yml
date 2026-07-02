@@ -1,0 +1,37 @@
+# AppVeyor — build do instalador .exe do Chronos IDE (Windows)
+# Espelha o job windows-latest de .github/workflows/ide-release.yml.
+# CI Windows gratuito para projetos open-source; nao usa a cobranca do GitHub.
+# A imagem "Visual Studio 2022" ja traz MSVC (C++), Windows SDK, Python e Node,
+# entao os modulos nativos (native-keymap etc.) compilam sem instalar nada local.
+
+version: '0.1.3.{build}'
+
+image: Visual Studio 2022
+
+environment:
+  nodejs_version: "22"
+  # Sem certificado de code-signing: nao tentar assinar o .exe
+  CSC_IDENTITY_AUTO_DISCOVERY: "false"
+  # electron-builder + node-gyp podem precisar de mais heap
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+# Nao ha solucao .NET/MSBuild — usamos build_script explicito
+build: off
+test: off
+
+install:
+  - ps: Install-Product node $env:nodejs_version x64
+  - node --version
+  - npm install -g yarn@1.22.22
+  - yarn --version
+  - yarn install --network-timeout 600000
+
+build_script:
+  - yarn build:extensions
+  - yarn workspace @chronos/electron-app download:plugins
+  - yarn workspace @chronos/electron-app package
+
+# O .exe fica em applications\electron\dist\ChronosIDE-Setup-0.1.3.exe
+artifacts:
+  - path: applications\electron\dist\*.exe
+    name: chronos-ide-windows
