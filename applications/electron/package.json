@@ -1,25 +1,28 @@
 {
   "private": true,
   "name": "@chronos/electron-app",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Chronos IDE — alvo desktop (instaladores .deb / .exe / .AppImage).",
   "author": "Chronos <dev@chronos.com.pt>",
   "homepage": "https://chronos.com.pt",
   "license": "MIT",
-  "main": "src-gen/backend/electron-main.js",
+  "main": "scripts/chronos-electron-main.js",
   "theia": {
     "target": "electron",
     "frontend": {
       "config": {
         "applicationName": "Chronos IDE",
+        "defaultLocale": "pt-br",
         "preferences": {
           "files.enableTrash": true,
-          "security.workspace.trust.enabled": false
+          "security.workspace.trust.enabled": false,
+          "chronos.baseUrl": "https://organizador.rezumme.ai",
+          "remote.ssh.useLocalServer": true
         },
         "electron": {
           "showWindowEarly": true,
           "splashScreenOptions": {
-            "content": "resources/ChronosSplash.svg",
+            "content": "resources/chronos-logo.png",
             "width": 480,
             "height": 300
           }
@@ -59,10 +62,12 @@
     "@theia/plugin-ext": "1.73.0",
     "@theia/plugin-ext-vscode": "1.73.0",
     "@theia/preferences": "1.73.0",
+    "@theia/remote": "1.73.0",
     "@theia/process": "1.73.0",
     "@theia/scm": "1.73.0",
     "@theia/search-in-workspace": "1.73.0",
     "@theia/terminal": "1.73.0",
+    "@theia/test": "1.73.0",
     "@theia/vsx-registry": "1.73.0",
     "@theia/workspace": "1.73.0"
   },
@@ -71,12 +76,18 @@
     "electron": "39.8.7",
     "electron-builder": "^26.15.3"
   },
+  "theiaPluginsDir": "plugins",
+  "theiaPlugins": {
+    "ChronosTasks.chronos-ide-utility": "https://open-vsx.org/api/ChronosTasks/chronos-ide-utility/1.1.0/file/ChronosTasks.chronos-ide-utility-1.1.0.vsix"
+  },
   "scripts": {
     "clean": "theia clean",
     "build": "theia build --mode production && theia rebuild:electron",
+    "postbuild": "node -e \"require('fs').copyFileSync('resources/chronos-logo.png','lib/frontend/chronos-logo.png')\"",
     "rebuild": "theia rebuild:electron",
-    "start": "theia start",
-    "package": "yarn build && electron-builder -c electron-builder.yml",
-    "package:dir": "yarn build && electron-builder -c electron-builder.yml --dir"
+    "start": "electron scripts/chronos-electron-main.js",
+    "download:plugins": "theia download:plugins",
+    "package": "yarn build && yarn download:plugins && electron-builder -c electron-builder.yml",
+    "package:dir": "yarn build && yarn download:plugins && electron-builder -c electron-builder.yml --dir"
   }
 }

@@ -27,8 +27,9 @@ install:
   - yarn install --network-timeout 600000
 
 build_script:
+  # build:extensions compila @chronos/branding e @chronos/kairos.
+  # O script "package" do electron-app ja faz build + download:plugins + electron-builder.
   - yarn build:extensions
-  - yarn workspace @chronos/electron-app download:plugins
   - yarn workspace @chronos/electron-app package
 
 # O .exe fica em applications\electron\dist\ChronosIDE-Setup-0.1.3.exe

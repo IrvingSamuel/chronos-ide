@@ -14,9 +14,9 @@ gen-webpack*.js
 # electron-builder output
 dist/
 
-# downloaded vscode builtin plugins
-plugins/*
-!plugins/.gitkeep
+# downloaded vscode builtin plugins (em qualquer workspace)
+plugins/
+**/plugins/
 
 # misc
 .DS_Store

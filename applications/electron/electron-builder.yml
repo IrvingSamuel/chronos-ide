@@ -12,6 +12,7 @@ asarUnpack:
   - "**/lib/backend/native/**"
   - "**/lib/backend/shell-integrations/**"
   - "**/lib/prebuilds/**"
+  - "plugins/**"
 nodeGypRebuild: false
 npmRebuild: false
 
@@ -22,10 +23,12 @@ directories:
 files:
   - src-gen
   - lib
+  - plugins
+  - scripts/chronos-electron-main.js
   - resources/icons/icon.png
-  - resources/ChronosSplash.svg
+  - resources/chronos-logo.png
   - "!**/node_modules/**/*.{md,markdown,ts,map,d.ts.map}"
-  - "!**/node_modules/**/{test,tests,__tests__,example,examples,docs}/**"
+  - "!**/node_modules/**/{tests,__tests__,example,examples,docs}/**"
 
 win:
   icon: resources/icons/icon.ico

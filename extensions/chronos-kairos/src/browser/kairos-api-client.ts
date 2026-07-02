@@ -1,18 +1,18 @@
 import { injectable, inject } from '@theia/core/shared/inversify';
 import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
-import { KairosChatMessage, KairosStreamEvent, KAIROS_DEFAULT_BASE_URL } from '../common/protocol';
+import {
+    KairosChatMessage, KairosStreamEvent, KairosToolCall,
+    KairosToolDefinition, KAIROS_DEFAULT_BASE_URL, KAIROS_DEFAULT_CHRONOS_URL,
+} from '../common/protocol';
 
 export interface KairosStreamHandlers {
     onToken(text: string): void;
+    onToolCalls?(calls: KairosToolCall[]): void;
     onUsage?(evt: KairosStreamEvent): void;
     onError(message: string): void;
     onDone(): void;
 }
 
-/**
- * Cliente do kairos-agent-server. Faz POST /v1/chat e consome o stream SSE
- * via fetch + ReadableStream (EventSource não suporta POST/headers).
- */
 @injectable()
 export class KairosApiClient {
 
@@ -32,17 +32,39 @@ export class KairosApiClient {
         return (this.prefs.get<string>('kairos.model', 'gemini-2.5-flash') || 'gemini-2.5-flash').trim();
     }
 
-    async streamChat(messages: KairosChatMessage[], handlers: KairosStreamHandlers, signal?: AbortSignal): Promise<void> {
+    get chronosBaseUrl(): string {
+        const v = (this.prefs.get<string>('kairos.chronosBaseUrl', KAIROS_DEFAULT_CHRONOS_URL) || KAIROS_DEFAULT_CHRONOS_URL).trim();
+        return v.replace(/\/+$/, '');
+    }
+
+    get chronosMcpToken(): string {
+        return (this.prefs.get<string>('kairos.chronosMcpToken', '') || '').trim();
+    }
+
+    async streamChat(
+        messages: KairosChatMessage[],
+        handlers: KairosStreamHandlers,
+        signal?: AbortSignal,
+        system?: string,
+        tools?: KairosToolDefinition[],
+    ): Promise<void> {
         let resp: Response;
         try {
             resp = await fetch(`${this.baseUrl}/v1/chat`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json; charset=utf-8',
                     'Accept': 'text/event-stream',
                     ...(this.token ? { 'Authorization': `Bearer ${this.token}` } : {})
                 },
-                body: JSON.stringify({ model: this.model, stream: true, messages }),
+                body: JSON.stringify({
+                    model: this.model,
+                    stream: true,
+                    messages,
+                    ...(system ? { system } : {}),
+                    ...(tools?.length ? { tools } : {}),
+                    caller: 'chronos-ide-kairos',
+                }),
                 signal
             });
         } catch (e) {
@@ -90,6 +112,9 @@ export class KairosApiClient {
                         case 'token':
                         case 'chunk':
                             handlers.onToken(evt.content ?? evt.delta ?? '');
+                            break;
+                        case 'tool_calls':
+                            handlers.onToolCalls?.(evt.tool_calls);
                             break;
                         case 'usage':
                             handlers.onUsage?.(evt);

@@ -5,6 +5,56 @@
     min-height: 0;
 }
 
+/* ── Toolbar ── */
+.chronos-kairos .kairos-toolbar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--theia-panel-border);
+}
+
+.chronos-kairos .kairos-mode-selector {
+    display: flex;
+    gap: 2px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--theia-input-border, var(--theia-panel-border));
+}
+
+.chronos-kairos .kairos-mode-btn {
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--theia-descriptionForeground);
+    transition: background 0.15s, color 0.15s;
+}
+
+.chronos-kairos .kairos-mode-btn:hover {
+    background: var(--theia-list-hoverBackground);
+}
+
+.chronos-kairos .kairos-mode-btn.active {
+    background: var(--theia-button-background);
+    color: var(--theia-button-foreground);
+}
+
+.chronos-kairos .kairos-mode-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.chronos-kairos .kairos-step-info {
+    font-size: 11px;
+    color: var(--theia-descriptionForeground);
+    margin-left: auto;
+}
+
+/* ── Messages ── */
 .chronos-kairos .kairos-messages {
     flex: 1 1 auto;
     overflow-y: auto;
@@ -58,11 +108,157 @@
     color: var(--theia-foreground);
 }
 
+.chronos-kairos .kairos-content.kairos-md {
+    white-space: normal;
+}
+
+.chronos-kairos .kairos-md p {
+    margin: 0 0 0.6em;
+}
+
+.chronos-kairos .kairos-md p:last-child {
+    margin-bottom: 0;
+}
+
+.chronos-kairos .kairos-md h1,
+.chronos-kairos .kairos-md h2,
+.chronos-kairos .kairos-md h3 {
+    margin: 0.8em 0 0.4em;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.chronos-kairos .kairos-md ul,
+.chronos-kairos .kairos-md ol {
+    margin: 0.4em 0;
+    padding-left: 1.4em;
+}
+
+.chronos-kairos .kairos-md li {
+    margin: 0.2em 0;
+}
+
+.chronos-kairos .kairos-md code {
+    font-family: var(--theia-code-font-family, monospace);
+    font-size: 12px;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    background: var(--theia-textCodeBlock-background, rgba(127, 127, 127, 0.15));
+}
+
+.chronos-kairos .kairos-md pre {
+    margin: 0.6em 0;
+    padding: 10px 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    background: var(--theia-textCodeBlock-background, rgba(127, 127, 127, 0.12));
+    border: 1px solid var(--theia-panel-border, rgba(128, 128, 128, 0.2));
+}
+
+.chronos-kairos .kairos-md pre code {
+    padding: 0;
+    background: transparent;
+}
+
+.chronos-kairos .kairos-md a {
+    color: var(--theia-textLink-foreground);
+}
+
+.chronos-kairos .kairos-md blockquote {
+    margin: 0.5em 0;
+    padding-left: 0.8em;
+    border-left: 3px solid var(--theia-panel-border);
+    color: var(--theia-descriptionForeground);
+}
+
 .chronos-kairos .kairos-msg.user .kairos-content {
     background: var(--theia-button-background);
     color: var(--theia-button-foreground);
 }
 
+/* ── Tool call cards ── */
+.chronos-kairos .kairos-tool-calls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.chronos-kairos .kairos-tool-card {
+    border: 1px solid var(--theia-panel-border);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.chronos-kairos .kairos-tool-summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    cursor: pointer;
+    background: var(--theia-editorWidget-background);
+    user-select: none;
+}
+
+.chronos-kairos .kairos-tool-summary.pending {
+    border-left: 3px solid var(--theia-progressBar-background, #0078d4);
+}
+
+.chronos-kairos .kairos-tool-summary.success {
+    border-left: 3px solid var(--theia-testing-iconPassed, #4caf50);
+}
+
+.chronos-kairos .kairos-tool-summary.error {
+    border-left: 3px solid var(--theia-testing-iconFailed, #f44336);
+}
+
+.chronos-kairos .kairos-tool-icon {
+    font-size: 13px;
+    width: 16px;
+    text-align: center;
+}
+
+.chronos-kairos .kairos-tool-name {
+    font-weight: 600;
+    font-family: var(--theia-code-font-family, monospace);
+}
+
+.chronos-kairos .kairos-tool-status {
+    margin-left: auto;
+    font-style: italic;
+    color: var(--theia-descriptionForeground);
+}
+
+.chronos-kairos .kairos-tool-body {
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chronos-kairos .kairos-tool-body pre {
+    margin: 2px 0 0;
+    padding: 6px 8px;
+    font-size: 11px;
+    line-height: 1.4;
+    border-radius: 4px;
+    overflow-x: auto;
+    background: var(--theia-textCodeBlock-background, rgba(127, 127, 127, 0.12));
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.chronos-kairos .kairos-tool-body strong {
+    font-size: 11px;
+    color: var(--theia-descriptionForeground);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* ── Input row ── */
 .chronos-kairos .kairos-input-row {
     flex: 0 0 auto;
     display: flex;

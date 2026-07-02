@@ -3,7 +3,7 @@ import { injectable, inject } from '@theia/core/shared/inversify';
 import { CommandRegistry } from '@theia/core/lib/common';
 import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
 import { GettingStartedWidget } from '@theia/getting-started/lib/browser/getting-started-widget';
-import { CHRONOS_LOGO_SVG } from './chronos-logo';
+import { CHRONOS_LOGO_URL } from './chronos-logo';
 
 /**
  * Página inicial (welcome) com a identidade do Chronos IDE.
@@ -20,7 +20,7 @@ export class ChronosGettingStartedWidget extends GettingStartedWidget {
         return (
             <div className='chronos-gs'>
                 <div className='chronos-gs-hero'>
-                    <span className='chronos-gs-logo' dangerouslySetInnerHTML={{ __html: CHRONOS_LOGO_SVG }} />
+                    <img className='chronos-gs-logo' src={CHRONOS_LOGO_URL} alt='Chronos' />
                     <h1 className='chronos-gs-title'>{appName}</h1>
                     <p className='chronos-gs-tag'>
                         O ambiente de desenvolvimento do ecossistema Chronos, com o agente <b>Kairos</b>.

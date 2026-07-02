@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@chronos/browser-app",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Chronos IDE — alvo navegador (hospedado em ide.chronos.com.pt).",
   "license": "MIT",
   "theia": {
@@ -12,7 +12,8 @@
         "reloadOnReconnect": true,
         "preferences": {
           "files.enableTrash": false,
-          "security.workspace.trust.enabled": false
+          "security.workspace.trust.enabled": false,
+          "chronos.baseUrl": "https://organizador.rezumme.ai"
         }
       }
     },
@@ -51,17 +52,23 @@
     "@theia/scm": "1.73.0",
     "@theia/search-in-workspace": "1.73.0",
     "@theia/terminal": "1.73.0",
+    "@theia/test": "1.73.0",
     "@theia/vsx-registry": "1.73.0",
     "@theia/workspace": "1.73.0"
   },
   "devDependencies": {
     "@theia/cli": "1.73.0"
   },
+  "theiaPluginsDir": "plugins",
+  "theiaPlugins": {
+    "ChronosTasks.chronos-ide-utility": "https://open-vsx.org/api/ChronosTasks/chronos-ide-utility/1.1.0/file/ChronosTasks.chronos-ide-utility-1.1.0.vsix"
+  },
   "scripts": {
     "clean": "theia clean",
     "build": "theia build --mode production",
     "build:dev": "theia build --mode development",
-    "start": "theia start --hostname 127.0.0.1 --port 3000",
+    "download:plugins": "theia download:plugins",
+    "start": "theia start --hostname 127.0.0.1 --port 3000 --plugins=local-dir:./plugins",
     "watch": "theia build --watch --mode development"
   }
 }

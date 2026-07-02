@@ -52,14 +52,21 @@ yarn package:electron        # saída em applications/electron/dist/
 
 ## Configurar o agente Kairos
 
-O painel Kairos (atalho **Ctrl/Cmd+Shift+K**) fala com o `kairos-agent-server`. Em
-**Preferências › kairos**:
+O painel Kairos (atalho **Ctrl/Cmd+Shift+K**) é o **code-agent** da IDE: envia contexto do workspace (árvore de arquivos, arquivo ativo e seleção) ao `kairos-agent-server`. Em **Preferências › kairos**:
 
 | Preferência         | Padrão                      | Descrição                                   |
 |---------------------|-----------------------------|---------------------------------------------|
 | `kairos.apiBaseUrl` | `https://api.chronos.com.pt`| URL do servidor do agente                   |
 | `kairos.apiToken`   | *(vazio)*                   | Token Bearer emitido em `console.chronos.com.pt` |
 | `kairos.model`      | `gemini-2.5-flash`          | Modelo padrão                               |
+
+Abra uma pasta de projeto (**Arquivo › Abrir pasta…**) para o Kairos analisar o repositório local.
+
+## SSH remoto (desktop)
+
+A Chronos IDE usa **`@theia/remote`** (nativo Theia) — **não** a extensão Microsoft/Open VSX `Remote SSH (Open Source)`.
+
+Se aparecer o aviso *"Proposed API not enabled"*, desinstale a extensão de marketplace (ex.: `jeanp413.open-remote-ssh`) em **Extensões**. O SSH nativo fica em **Paleta de comandos › Remote: Connect to Host…**.
 
 ## Trocar a logo / marca
 

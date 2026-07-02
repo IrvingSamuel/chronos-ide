@@ -1,34 +1,47 @@
-import { injectable } from '@theia/core/shared/inversify';
+import { injectable, inject } from '@theia/core/shared/inversify';
 import { FrontendApplicationContribution, FrontendApplication } from '@theia/core/lib/browser';
 import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
-import { CHRONOS_LOGO_SVG } from './chronos-logo';
+import { CommandRegistry } from '@theia/core/lib/common';
+import { CHRONOS_LOGO_URL } from './chronos-logo';
 
-/**
- * Ajusta o título da janela/aba e o favicon para a identidade do Chronos IDE.
- * O nome em si vem de `theia.frontend.config.applicationName` ("Chronos IDE").
- */
 @injectable()
 export class ChronosBrandingContribution implements FrontendApplicationContribution {
+
+    @inject(CommandRegistry)
+    protected readonly commands!: CommandRegistry;
 
     onStart(_app: FrontendApplication): void {
         const appName = FrontendApplicationConfigProvider.get().applicationName || 'Chronos IDE';
         document.title = appName;
         this.applyFavicon();
+        this.openChronosSidebarOnFirstLaunch();
     }
 
     protected applyFavicon(): void {
         try {
-            const url = 'data:image/svg+xml;base64,' + btoa(CHRONOS_LOGO_SVG);
             let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
             if (!link) {
                 link = document.createElement('link');
                 link.rel = 'icon';
                 document.head.appendChild(link);
             }
-            link.type = 'image/svg+xml';
-            link.href = url;
+            link.type = 'image/png';
+            link.href = CHRONOS_LOGO_URL;
         } catch {
-            // favicon é cosmético — falha não deve quebrar a aplicação
+            // favicon is cosmetic — failure must not break the app
         }
+    }
+
+    protected openChronosSidebarOnFirstLaunch(): void {
+        const key = 'chronos.sidebarShown';
+        if (localStorage.getItem(key)) {
+            return;
+        }
+        localStorage.setItem(key, '1');
+        setTimeout(() => {
+            if (this.commands.getCommand('chronos.account') && this.commands.isEnabled('chronos.account')) {
+                this.commands.executeCommand('chronos.account');
+            }
+        }, 2000);
     }
 }

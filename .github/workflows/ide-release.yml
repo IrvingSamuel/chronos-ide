@@ -48,6 +48,9 @@ jobs:
       - name: Build extensions
         run: yarn build:extensions
 
+      - name: Download bundled plugins
+        run: yarn workspace @chronos/electron-app download:plugins
+
       - name: Package desktop app
         run: yarn workspace @chronos/electron-app package
         env:

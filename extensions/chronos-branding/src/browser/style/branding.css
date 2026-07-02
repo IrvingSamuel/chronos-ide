@@ -17,9 +17,11 @@
     max-width: 560px;
 }
 
-.chronos-gs-logo svg {
-    width: 104px;
+.chronos-gs-logo {
     height: 104px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
     filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .35));
 }
 
